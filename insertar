@@ -1,6 +1,6 @@
 <?php
-$conexion = mysqli_connect("localhost","root","","utesa") or
-die("Error en la conexion");
+$conexion = mysqli_connect("localhost", "root", "", "utesa") 
+or die("Error en la conexion");
 
 $nombre = $_POST["nombre"];
 $apellido = $_POST["apellido"];
@@ -8,10 +8,15 @@ $correo = $_POST["correo"];
 $telefono = $_POST["telefono"];
 $matricula = $_POST["matricula"];
 
-mysqli_query($conexion,"INSERT INTO estudiantes
-VALUES (NULL, '$nombre', '$apellido', '$correo', '$telefono', '$matricula')")
-or die("Error" . mysqli_error($conexion));
+
+$query = "INSERT INTO estudiantes (nombre, apellido, correo, telefono, matricula) 
+VALUES ('$nombre', '$apellido', '$correo', '$telefono', '$matricula')";
+
+mysqli_query($conexion, $query) 
+or die("Error: " . mysqli_error($conexion));
 
 mysqli_close($conexion);
-echo "<script> alert('los datos fueron guardado correctamente');
-window.location='estudiantes.php';</script>";
+
+header("Location: estudiantes.php?mensaje=ok");
+exit();
+?>
