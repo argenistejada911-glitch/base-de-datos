@@ -1,0 +1,17 @@
+<?php
+$conexion = mysqli_connect("localhost","root","","utesa") or
+die("Error en la conexion");
+
+$nombre = $_POST["nombre"];
+$apellido = $_POST["apellido"];
+$correo = $_POST["correo"];
+$telefono = $_POST["telefono"];
+$matricula = $_POST["matricula"];
+
+mysqli_query($conexion,"INSERT INTO estudiantes
+VALUES (NULL, '$nombre', '$apellido', '$correo', '$telefono', '$matricula')")
+or die("Error" . mysqli_error($conexion));
+
+mysqli_close($conexion);
+echo "<script> alert('los datos fueron guardado correctamente');
+window.location='estudiantes.php';</script>";
